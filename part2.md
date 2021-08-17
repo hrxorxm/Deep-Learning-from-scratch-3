@@ -283,9 +283,9 @@ def setup_variable():
 * 최적화 문제의 테스트 함수 : 다양한 최적화 기법이 '얼마나 좋은가'를 평가하는 데 사용되는 함수, '벤치마크'용 함수
 * [위키백과의 'Test functions for optimization'페이지 참고](https://en.wikipedia.org/wiki/Test_functions_for_optimization)
 * [복잡한 함수의 미분 테스트 예제](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/steps/step24.py)
-  * Sphere : $z = x^2 + y^2$
-  * matyas (called 마차시) : $z = 0.26(x^2 + y^2) - 0.48xy$
-  * Goldstein-Price : $z = [1+(x+y+1)^2(19-14x+3x^2-14y+6xy+3y^2)][30+(2x-3y)^2(18-32x+12x^2+48y-36xy+27y^2)]$
+  * Sphere : <!-- $z = x^2 + y^2$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=z%20%3D%20x%5E2%20%2B%20y%5E2">
+  * matyas (called 마차시) : <!-- $z = 0.26(x^2 + y^2) - 0.48xy$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=z%20%3D%200.26(x%5E2%20%2B%20y%5E2)%20-%200.48xy">
+  * Goldstein-Price : <!-- $z = [1+(x+y+1)^2(19-14x+3x^2-14y+6xy+3y^2)][30+(2x-3y)^2(18-32x+12x^2+48y-36xy+27y^2)]$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=z%20%3D%20%5B1%2B(x%2By%2B1)%5E2(19-14x%2B3x%5E2-14y%2B6xy%2B3y%5E2)%5D%5B30%2B(2x-3y)%5E2(18-32x%2B12x%5E2%2B48y-36xy%2B27y%5E2)%5D">
 
 
 ## 6. 부록

@@ -38,12 +38,12 @@
 ### 수치 미분
 * 미분 : (극한으로 짧은 시간에서의) 변화율
 * 전진차분(forward difference)
-  * $f'(x) = \underset{h \rightarrow 0}{\lim} \frac{f(x+h) - f(x)}{h}$
+  * <!-- $f'(x) = \underset{h \rightarrow 0}{\lim} \frac{f(x+h) - f(x)}{h}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=f'(x)%20%3D%20%5Cunderset%7Bh%20%5Crightarrow%200%7D%7B%5Clim%7D%20%5Cfrac%7Bf(x%2Bh)%20-%20f(x)%7D%7Bh%7D">
 * 중앙차분(centered difference)
-  * $f'(x) = \underset{h \rightarrow 0}{\lim} \frac{f(x+h) - f(x-h)}{2h}$
+  * <!-- $f'(x) = \underset{h \rightarrow 0}{\lim} \frac{f(x+h) - f(x-h)}{2h}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=f'(x)%20%3D%20%5Cunderset%7Bh%20%5Crightarrow%200%7D%7B%5Clim%7D%20%5Cfrac%7Bf(x%2Bh)%20-%20f(x-h)%7D%7B2h%7D">
   * 근사 오차를 (조금이라도) 줄이는 방법
 * 수치 미분(numerical differentation) : 근사값를 이용하여 함수의 변화량을 구하는 방법
-  * (예시) $h \rightarrow 0$ 대신 $h = 1e-4$ 를 대입해서 계산
+  * (예시) <!-- $h \rightarrow 0$ 대신 $h = 1e-4$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=h%20%5Crightarrow%200%24%20%EB%8C%80%EC%8B%A0%20%24h%20%3D%201e-4"> 를 대입해서 계산
   * 장점 : 쉬운 구현
   * 단점 : 큰 계산 비용, 정확도 문제(자릿수 누락)
 * 기울기 확인(gradient checking) : 역전파를 정확하게 구현했는지 확인하기 위해 수치 미분의 결과 이용
@@ -51,13 +51,13 @@
 ### 역전파
 * 역전파(backpropagation) : 변수별 미분을 계산하는 알고리즘
 * 연쇄 법칙(chain rule) : 합성 함수의 미분은 구성 함수 각각을 미분한 후 곱한 것과 같다.
-  * $a = A(x), b = B(a), y = C(b)$ 일 때,
-  * $\frac{dy}{dx} = ((\frac{dy}{dy} \frac{dy}{db}) \frac{db}{da}) \frac{da}{dx}$
+  * <!-- $a = A(x), b = B(a), y = C(b)$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=a%20%3D%20A(x)%2C%20b%20%3D%20B(a)%2C%20y%20%3D%20C(b)"> 일 때,
+  * <!-- $\frac{dy}{dx} = ((\frac{dy}{dy} \frac{dy}{db}) \frac{db}{da}) \frac{da}{dx}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cfrac%7Bdy%7D%7Bdx%7D%20%3D%20((%5Cfrac%7Bdy%7D%7Bdy%7D%20%5Cfrac%7Bdy%7D%7Bdb%7D)%20%5Cfrac%7Bdb%7D%7Bda%7D)%20%5Cfrac%7Bda%7D%7Bdx%7D">
 * 손실 함수(loss function)의 각 매개변수에 대한 미분을 계산하기 위해 사용
 * 순전파와 역전파의 대응관계
   * 통상값, 통상 계산(순전파)
   * 미분값, 미분값을 구하기 위한 계산(역전파)
-  * $C'(b)$ 를 계산하기 위해서 $b$ 값이 필요하다.
+  * <!-- $C'(b)$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=C'(b)"> 를 계산하기 위해서 <!-- $b$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=b"> 값이 필요하다.
   * 역전파를 구현하기 위해서는 먼저 순전파를 하고, 각 함수의 입력 변수의 값을 기억해둬야 한다.
 * 역전파 자동화
   * Define-by-Run

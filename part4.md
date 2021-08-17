@@ -19,33 +19,7 @@
 * 텐서 사용 시의 순전파
   * 넘파이의 브로드캐스트(broadcast) : 피연산자의 형상이 다르면 자동으로 데이터를 복사하여 같은 형상의 텐서로 변환해주는 기능
 * 텐서 사용 시의 역전파
-  * 야코비 행렬(Jacobian matrix) : $\bold{x}, \bold{y}$가 벡터일 때, $\bold{y} = F(\bold{x})$의 미분
-    * $
-      \frac{\partial \bold{y}}{\partial \bold{x}} = 
-      \begin{pmatrix} 
-          \frac{\partial y_1}{\partial x_1} & \frac{\partial y_1}{\partial x_2} & ... & \frac{\partial y_1}{\partial x_n} \\
-          \frac{\partial y_2}{\partial x_1} & \frac{\partial y_2}{\partial x_2} & ... & \frac{\partial y_2}{\partial x_n} \\
-          ... & ... & ... & ... \\
-          \frac{\partial y_n}{\partial x_1} & \frac{\partial y_n}{\partial x_2} & ... & \frac{\partial y_n}{\partial x_n}
-      \end{pmatrix}
-      $
-  * $1 \times n$ 야코비 행렬(행 벡터) : $y$가 스칼라이고, $\bold{x}$가 벡터일 때, $y = F(\bold{x})$의 미분
-    * $\frac{\partial y}{\partial \bold{x}} = (\frac{\partial y}{\partial x_1}, \frac{\partial y}{\partial x_2}, ..., \frac{\partial y}{\partial x_n})$
-    * 머신러닝 문제에서는 텐서를 입력받아 스칼라를 출력하는 함수(손실 함수, loss function)를 설정하는 것이 일반적이다.
-  * $\bold{a} = A(\bold{x}), \bold{b} = B(\bold{a}), y = C(\bold{b})$ ($\bold{x}, \bold{a}, \bold{b}$는 벡터이고, $y$만 스칼라인 경우)
-    * $\frac{\partial y}{\partial \bold{x}} = \frac{\partial y}{\partial \bold{b}} \frac{\partial \bold{b}}{\partial \bold{a}} \frac{\partial \bold{a}}{\partial \bold{x}}$
-    * 자동 미분의 forward 모드 : $\frac{\partial y}{\partial \bold{x}} = (\frac{\partial y}{\partial \bold{b}} (\frac{\partial \bold{b}}{\partial \bold{a}} \frac{\partial \bold{a}}{\partial \bold{x}}))$, 
-      $
-      \frac{\partial \bold{b}}{\partial \bold{x}} = 
-      \begin{pmatrix}
-          \frac{\partial b_1}{\partial x_1} & \frac{\partial b_1}{\partial x_2} & ... & \frac{\partial b_1}{\partial x_n} \\
-          \frac{\partial b_2}{\partial x_1} & \frac{\partial b_2}{\partial x_2} & ... & \frac{\partial b_2}{\partial x_n} \\
-          ... & ... & ... & ... \\
-          \frac{\partial b_n}{\partial x_1} & \frac{\partial b_n}{\partial x_2} & ... & \frac{\partial b_n}{\partial x_n}
-      \end{pmatrix}
-      $
-    * 자동 미분의 reverse 모드 : $\frac{\partial y}{\partial \bold{x}} = ((\frac{\partial y}{\partial \bold{b}} \frac{\partial\bold{b}}{\partial \bold{a}}) \frac{\partial \bold{a}}{\partial \bold{x}})$, $\frac{\partial y}{\partial \bold{a}} = \begin{pmatrix} \frac{\partial y}{\partial a_1} & \frac{\partial y}{\partial a_2} & ... & \frac{\partial y}{\partial a_n} \end{pmatrix}$
-    * 행렬과 행렬의 곱보다 벡터와 행렬의 곱 쪽의 계산량이 더 적다. 따라서 reverse모드의 계산 효율이 더 좋다.
+  * ![image](https://user-images.githubusercontent.com/35680202/129689712-7f2d4000-6960-422f-8473-6bef130b518b.png)
 
 ### 원소별로 계산하지 않는 함수
 ※ 주의 : Function의 backward 내에서 모두 Variable 인스턴스를 사용하므로 구현할 때 **DeZero 함수**를 사용해야 한다.
@@ -76,15 +50,7 @@
 
 * 행렬의 곱
   * 개념
-    * 벡터의 내적 : 두 벡터 $\bold{a} = (a_1, ..., a_n), \bold{b} = (b_1, ..., b_n)$의 내적 $\bold{ab} = a_1 b_1 + a_2 b_2 + ... + a_n b_n$
-    * 행렬의 곱 : 왼쪽 행렬의 '가로 방향 벡터'와 오른쪽 행렬의 '세로 방향 벡터' 사이의 내적을 계산하여 새로운 행렬의 원소가 된다.
-      * $\bold{y} = \bold{xW}$, ($\bold{x}$ : $1 \times D$, $\bold{W}$ : $D \times H$, $\bold{y}$ : $1 \times H$)일 때
-        * $y_j = x_1 W_{1j} + x_2 W_{2j} + ... + x_i W_{ij} + ... + x_H W_{Hj}$
-        * $\frac{\partial y_j}{\partial x_i} = W_{ij}$ 이므로, $\frac{\partial L}{\partial x_i} = {\sum}_j \frac{\partial L}{\partial y_j} \frac{\partial y_j}{\partial x_i} = {\sum}_j \frac{\partial L}{\partial y_j} W_{ij}$, 즉, $\frac{\partial L}{\partial x_i}$은 '벡터 $\frac{\partial L}{\partial \bold{y}}$' 와 '$\bold{W}$의 $i$행 벡터'의 내적으로 구해진다.
-        * $\frac{\partial L}{\partial \bold{x}} = \frac{\partial L}{\partial \bold{y}} \bold{W}^T$ ($\frac{\partial L}{\partial \bold{x}}$ : $1 \times D$, $\frac{\partial L}{\partial \bold{y}}$ : $1 \times H$, $\bold{W}^T$ : $H \times D$)
-      * $\bold{y} = \bold{xW}$, ($\bold{x}$ : $N \times D$, $\bold{W}$ : $D \times H$, $\bold{y}$ : $N \times H$)일 때
-        * $\frac{\partial L}{\partial \bold{x}} = \frac{\partial L}{\partial \bold{y}} \bold{W}^T$
-        * $\frac{\partial L}{\partial \bold{W}} = \bold{x}^T \frac{\partial L}{\partial \bold{y}}$
+    * ![image](https://user-images.githubusercontent.com/35680202/129689881-8108e495-5ab6-4a82-a966-b5baeb64e86d.png)
   * `matmul` : 행렬 곱 계산 - [[Function으로 구현](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/dezero/functions.py#L257)]
     * 순전파 : `numpy의 dot` 함수 사용
       * `np.dot(x, W)` 대신 `x.dot(W)`로 구현하여 ndarray 인스턴스에도 대응할 수 있도록 한다. 
@@ -103,9 +69,9 @@
 ### 선형 회귀
 * **회귀**(regression) : x로부터 실숫값 y를 예측하는 것
 * **선형 회귀**(linear regression) : 회귀 모델 중 예측값이 선형(직선)을 이루는 것
-  * 목표 : $y = Wx + b$, 손실 함수의 출력을 최소화하는 $W$와 $b$ 찾기
+  * 목표 : <!-- $y = Wx + b$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=y%20%3D%20Wx%20%2B%20b">, 손실 함수의 출력을 최소화하는 <!-- $W$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=W">와 <!-- $b$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=b"> 찾기
   * 평균 제곱 오차(mean squared error) : 선형 회귀는 손실 함수로 평균 제곱 오차를 이용할 수 있다.
-    * $L = \frac{1}{N} {\sum}_{i=1}^{N} (f(x_i) - y_i)^2$
+    * <!-- $L = \frac{1}{N} {\sum}_{i=1}^{N} (f(x_i) - y_i)^2$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=L%20%3D%20%5Cfrac%7B1%7D%7BN%7D%20%7B%5Csum%7D_%7Bi%3D1%7D%5E%7BN%7D%20(f(x_i)%20-%20y_i)%5E2">
     * [[기본 구현](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/dezero/functions.py#L418) | [Function으로 구현](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/dezero/functions.py#L425)]
 * [선형 회귀 구현 예제](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/steps/step42.py)
   * 경사하강법으로 매개변수를 갱신할 때, 계산 그래프를 만들지 않도록 W.data, W.grad.data값을 이용한다.
@@ -123,7 +89,7 @@
   * 활성화 함수(activation function)
     * ex) ReLU 함수, 시그모이드 함수
   * 시그모이드 함수(sigmoid function)
-    * $y = \frac{1}{1 + e^{-x}}$
+    * <!-- $y = \frac{1}{1 + e^{-x}}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=y%20%3D%20%5Cfrac%7B1%7D%7B1%20%2B%20e%5E%7B-x%7D%7D">
     * [[기본 구현](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/dezero/functions.py#L305) | [Function으로 구현](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/dezero/functions.py#L311)]
 * [2층 신경망 구현 예제](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/steps/step43.py)
   * 입력층(input layer), 은닉층(hidden layer or middle layer), 출력층(output layer)
@@ -256,16 +222,16 @@
 ### 다중 클래스 분류
 * 다중 클래스 분류(multi-class classification) : 분류 대상이 여러 가지 클래스 중 어디에 속하는지 추정
 * 소프트맥스 함수(softmax function) : 원소 각각을 확률로 해설할 수 있게 된다.
-  * $p_k = \frac{e^{y_k}}{{\sum}_{i=1}^{n} e^{y_i}}$ ($0 \leq p_i \leq 1$, ${\sum}_{i=1}^{n} p_i = 1$)
+  * <!-- $p_k = \frac{e^{y_k}}{{\sum}_{i=1}^{n} e^{y_i}}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=p_k%20%3D%20%5Cfrac%7Be%5E%7By_k%7D%7D%7B%7B%5Csum%7D_%7Bi%3D1%7D%5E%7Bn%7D%20e%5E%7By_i%7D%7D"> (<!-- $0 \leq p_i \leq 1$, ${\sum}_{i=1}^{n} p_i = 1$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=0%20%5Cleq%20p_i%20%5Cleq%201%24%2C%20%24%7B%5Csum%7D_%7Bi%3D1%7D%5E%7Bn%7D%20p_i%20%3D%201">)
   * [[기본 구현](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/dezero/functions.py#L345) | [Function으로 구현](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/dezero/functions.py#L352)]
 * 교차 엔트로피 오차(cross entropy error)
   * 원핫 벡터(one-hot vector) : 정답 데이터의 각 원소가 정답에 해당하는 클래스면 1, 아니면 0으로 표현
-  * $L = - \underset{k}{\sum} t_k \log p_k$
-    * $t_k$ : 원핫벡터로 표현된 정답 데이터의 $k$차원째 값
-  * $L = - \log \bold{p}[t]$
-    * $t$ : 정답 클래스의 번호
+  * <!-- $L = - \underset{k}{\sum} t_k \log p_k$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=L%20%3D%20-%20%5Cunderset%7Bk%7D%7B%5Csum%7D%20t_k%20%5Clog%20p_k">
+    * <!-- $t_k$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=t_k"> : 원핫벡터로 표현된 정답 데이터의 <!-- $k$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=k">차원째 값
+  * <!-- $L = - \log p[t]$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=L%20%3D%20-%20%5Clog%20p%5Bt%5D">
+    * <!-- $t$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=t"> : 정답 클래스의 번호
   * [[기본 구현](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/dezero/functions.py#L443) | [Function으로 구현](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/dezero/functions.py#L454)]
-    * $\log (0)$을 방지하기 위해 `clip` 함수 이용
+    * <!-- $\log (0)$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Clog%20(0)">을 방지하기 위해 `clip` 함수 이용
     * [clip 함수](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/dezero/functions.py#L644) : Variable x의 원소가 x_min 이하면 x_min으로, x_max 이상이면 x_max로 변환
 * [다중 클래스 분류 예제](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/steps/step48.py)
   * [스파이럴(spiral) 데이터셋](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/dezero/datasets.py#L43) : 나선형 혹은 소용돌이 모양

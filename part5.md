@@ -195,13 +195,7 @@
   * 순환(loop) 구조를 가지고 있다.
   * 즉, 데이터가 입력되면 '상태'가 갱신되고 그 '상태'도 출력에 영향을 준다.
   * 입력 데이터가 나열되는 패턴을 학습할 수 있다.
-* $\bold{h}_t = \tanh (\bold{h}_{t-1} \bold{W}_\bold{h} + \bold{x}_t \bold{W}_\bold{x} + \bold{b})$
-  * $t$ : 시계열 데이터의 시각
-  * $\bold{x}_t$ : 행벡터, 시계열(time series) 데이터 입력
-  * $\bold{h}_t$ : 행벡터, 은닉 상태(hidden state)
-  * $\bold{W}_\bold{x}$ : 입력 $\bold{x}$를 은닉 상태 $\bold{h}$로 변환하기 위한 가중치
-  * $\bold{W}_\bold{h}$ : RNN의 출력을 다음 시각의 출력으로 변환하기 위한 가중치
-  * $\bold{b}$ : 편향
+* ![image](https://user-images.githubusercontent.com/35680202/129688643-5a8da4eb-680d-4997-829c-1146bfa146fe.png)
 * RNN 계층 구현
   * [[Layer로 구현](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/dezero/layers.py#L221)]
     * x2h : 입력 x에서 은닉 상태 h로 변환하는 완전연결계층
@@ -221,13 +215,7 @@
     * 데이터의 순서가 바뀌면 안 된다.
     * batch_index 위치에서 시작해서 batch_size 개수 만큼 가져온다.
 * LSTM 계층
-  * $\bold{h}_t = \bold{o}_t \odot \tanh (\bold{c}_t)$
-    * $\bold{o}_t = \sigma (\bold{x}_t \bold{W}_{\bold{x}}^{(\bold{o})} + \bold{h}_{t-1} \bold{W}_{\bold{h}}^{(\bold{o})} + \bold{b}^{\bold{(o)}})$
-    * $\odot$ : 아다마르 곱(Hadamard product), 같은 크기의 두 행렬의 각 성분을 곱하는 연산
-    * $\bold{c}_t = \bold{f}_t \odot \bold{c}_{t-1} + \bold{i}_t \odot \bold{u}_t$ : 기억 셀
-      * $\bold{f}_t = \sigma (\bold{x}_t \bold{W}_{\bold{x}}^{(\bold{f})} + \bold{h}_{t-1} \bold{W}_{\bold{h}}^{(\bold{f})} + \bold{b}^{\bold{(f)}})$
-      * $\bold{i}_t = \sigma (\bold{x}_t \bold{W}_{\bold{x}}^{(\bold{i})} + \bold{h}_{t-1} \bold{W}_{\bold{h}}^{(\bold{i})} + \bold{b}^{\bold{(i)}})$
-      * $\bold{u}_t = \tanh (\bold{x}_t \bold{W}_{\bold{x}}^{(\bold{u})} + \bold{h}_{t-1} \bold{W}_{\bold{h}}^{(\bold{u})} + \bold{b}^{\bold{(u)}})$
+  * ![image](https://user-images.githubusercontent.com/35680202/129689345-ec15915b-bbef-419e-8b84-56a097e81d1a.png)
   * [[Layer로 구현](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/dezero/layers.py#L249)]
 * 개선된 RNN 모델 구현
   * [BetterRNN 구현 예제](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/steps/step60.py)

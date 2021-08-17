@@ -54,12 +54,12 @@
 ## 2. 테일러 급수 미분
 ### 테일러 급수 이론
 * 테일러 급수(Taylor Series) : 어떤 함수를 다항식으로 근사하는 방법
-  * $f(x) = f(a) + f'(a)(x - a) + \frac{1}{2!}f''(a)(x - a)^2 + \frac{1}{3!}f'''(a)(x - a)^3 + ...$
-  * : 점 $a$에서 $f(x)$의 테일러 급수, 항이 많아질수록 근사의 정확도가 높아짐
-* 매클로린 전개(Maclaurin's series) : $a = 0$일 때의 테일러 급수
-  * $f(x) = f(0) + f'(0)x + \frac{1}{2!}f''(0)x^2 + \frac{1}{3!}f'''(0)x^3 + ...$
+  * <!-- $f(x) = f(a) + f'(a)(x - a) + \frac{1}{2!}f''(a)(x - a)^2 + \frac{1}{3!}f'''(a)(x - a)^3 + ...$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=f(x)%20%3D%20f(a)%20%2B%20f'(a)(x%20-%20a)%20%2B%20%5Cfrac%7B1%7D%7B2!%7Df''(a)(x%20-%20a)%5E2%20%2B%20%5Cfrac%7B1%7D%7B3!%7Df'''(a)(x%20-%20a)%5E3%20%2B%20...">
+  * : 점 <!-- $a$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=a">에서 <!-- $f(x)$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=f(x)">의 테일러 급수, 항이 많아질수록 근사의 정확도가 높아짐
+* 매클로린 전개(Maclaurin's series) : <!-- $a = 0$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=a%20%3D%200">일 때의 테일러 급수
+  * <!-- $f(x) = f(0) + f'(0)x + \frac{1}{2!}f''(0)x^2 + \frac{1}{3!}f'''(0)x^3 + ...$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=f(x)%20%3D%20f(0)%20%2B%20f'(0)x%20%2B%20%5Cfrac%7B1%7D%7B2!%7Df''(0)x%5E2%20%2B%20%5Cfrac%7B1%7D%7B3!%7Df'''(0)x%5E3%20%2B%20...">
 * [테일러 급수 구현 예제](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/steps/step27.py)
-  * $sin(x) = \frac{x}{1!} - \frac{x^3}{3!} + \frac{x^5}{5!} + ... = \sum_{i=0}^{\infty} (-1)^{i} \frac{x^{2i + 1}}{(2i + 1)!}$
+  * <!-- $sin(x) = \frac{x}{1!} - \frac{x^3}{3!} + \frac{x^5}{5!} + ... = \sum_{i=0}^{\infty} (-1)^{i} \frac{x^{2i + 1}}{(2i + 1)!}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=sin(x)%20%3D%20%5Cfrac%7Bx%7D%7B1!%7D%20-%20%5Cfrac%7Bx%5E3%7D%7B3!%7D%20%2B%20%5Cfrac%7Bx%5E5%7D%7B5!%7D%20%2B%20...%20%3D%20%5Csum_%7Bi%3D0%7D%5E%7B%5Cinfty%7D%20(-1)%5E%7Bi%7D%20%5Cfrac%7Bx%5E%7B2i%20%2B%201%7D%7D%7B(2i%20%2B%201)!%7D">
   * 테일러 급수의 임곗값(threshhold)을 작게할 수록 이론상으로 근사 정밀도가 높아진다. 하지만 컴퓨터 계산에서는 자릿수 누락이나 반올림이 발생할 수 있다.
 
 
@@ -68,25 +68,25 @@
 * 최적화 : 어떤 함수가 주어졌을 때, 그 최솟값(혹은 최댓값)을 반환하는 '입력(함수의 인수)'을 찾는 일, 신경망 학습의 목표는 손실 함수의 최적화이다.
 * 함수 예시
   * 로젠브록 함수(Rosenbrock function, Banana function)
-    * $f(x_0, x_1) = b(x_1 - x_0^2)^2 + (a - x_0)^2$ (단, $a,b$는 정수)
+    * <!-- $f(x_0, x_1) = b(x_1 - x_0^2)^2 + (a - x_0)^2$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=f(x_0%2C%20x_1)%20%3D%20b(x_1%20-%20x_0%5E2)%5E2%20%2B%20(a%20-%20x_0)%5E2"> (단, <!-- $a,b$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=a%2Cb">는 정수)
     * 벤치마크로 자주 쓰이는 이유 : 골짜기로 향하는 기울기에 비해 골짜기 바닥에서 전역 최솟값으로 가는 기울기가 너무 작아서 최적화하기가 어렵기 때문
 
 ### 경사하강법
 * 기울기(gradient) : 각 지점에서 함수의 출력을 (적어도 국소적으로는) 가장 크게(+)/작게(-) 하는 방향을 가리킨다.
 * 경사하강법(gradient descent) : 기울기 방향에 마이너스를 곱한 방향으로 일정 거리만큼 이동하여 다시 기울기를 구하는 작업을 반복하여 원하는 지점에 접근하는 방법
-  * $x \leftarrow x - \alpha f'(x)$
-  * $\alpha$는 수동 설정, $\alpha$의 값만큼 기울기(1차 미분) 방향으로 진행하여 $x$의 값을 갱신한다.
+  * <!-- $x \leftarrow x - \alpha f'(x)$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=x%20%5Cleftarrow%20x%20-%20%5Calpha%20f'(x)">
+  * <!-- $\alpha$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Calpha">는 수동 설정, <!-- $\alpha$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Calpha">의 값만큼 기울기(1차 미분) 방향으로 진행하여 <!-- $x$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=x">의 값을 갱신한다.
 * [경사하강법 최적화 예시](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/steps/step28.py)
 
 ### 뉴턴 방법
 * 2차까지 테일러 급수로 근사
-  * 어떤 함수를 $x$의 2차 함수로 근사한 것을 $y = f(x)$라고 하자.
-    * $f(x) = f(a) + f'(a)(x - a) + \frac{1}{2} f''(a)(x - a)^2$
+  * 어떤 함수를 <!-- $x$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=x">의 2차 함수로 근사한 것을 <!-- $y = f(x)$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=y%20%3D%20f(x)">라고 하자.
+    * <!-- $f(x) = f(a) + f'(a)(x - a) + \frac{1}{2} f''(a)(x - a)^2$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=f(x)%20%3D%20f(a)%20%2B%20f'(a)(x%20-%20a)%20%2B%20%5Cfrac%7B1%7D%7B2%7D%20f''(a)(x%20-%20a)%5E2">
   * 근사한 2차 함수의 최솟값은 2차 함수의 미분 결과가 0인 위치에 있다.
-    * $x = a - \frac{f'(a)}{f''(a)}$
-* 뉴턴 방법(Newton's method) : 2차 미분을 이용하여 $\alpha$를 자동으로 조정한다.
-  * $x \leftarrow x - \frac{f'(x)}{f''(x)}$
-  * $\alpha = \frac{1}{f''(x)}$
+    * <!-- $x = a - \frac{f'(a)}{f''(a)}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=x%20%3D%20a%20-%20%5Cfrac%7Bf'(a)%7D%7Bf''(a)%7D">
+* 뉴턴 방법(Newton's method) : 2차 미분을 이용하여 <!-- $\alpha$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Calpha">를 자동으로 조정한다.
+  * <!-- $x \leftarrow x - \frac{f'(x)}{f''(x)}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=x%20%5Cleftarrow%20x%20-%20%5Cfrac%7Bf'(x)%7D%7Bf''(x)%7D">
+  * <!-- $\alpha = \frac{1}{f''(x)}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Calpha%20%3D%20%5Cfrac%7B1%7D%7Bf''(x)%7D">
 * [뉴턴 방법 최적화 예시](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/steps/step29.py)
 
 
@@ -256,25 +256,15 @@ class Mul(Function):
 
 ## 6. 부록
 ### 뉴턴 방법의 한계와 대안
-* 다변수 함수의 뉴턴 방법 (즉, $\bold{x} = (x_1, x_2, ..., x_n)$일 때, $y = f(\bold{x})$에 대한 뉴턴 방법)
-  * $\bold{x} \leftarrow \bold{x} - [{\nabla}^2 f(\bold{x})]^{-1} \nabla f(\bold{x})$
-  * $\nabla f(\bold{x})$ : 기울기(gradient), $\bold{x}$의 각 원소에 대한 미분
-    $$
-    \nabla f(\bold{x}) = \frac{\partial f}{\partial \bold{x}} = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, ..., \frac{\partial f}{\partial x_n})^{T}
-    $$
-  * ${\nabla}^2 f(\bold{x})$ : 헤세 행렬(Hessian matrix)
-    $$
-    {\nabla}^2 f(\bold{x}) = \frac{{\partial}^2 f}{\partial \bold{x} \partial \bold{x}^T} = 
-    \begin{pmatrix} 
-    \frac{{\partial}^2 f}{\partial x_1^2} & \frac{{\partial}^2 f}{\partial x_1 \partial x_2} & ... & \frac{{\partial}^2 f}{\partial x_1 \partial x_n} \\
-    \frac{{\partial}^2 f}{\partial x_2 \partial x_1} & \frac{{\partial}^2 f}{\partial x_2^2} & ... & \frac{{\partial}^2 f}{\partial x_2 \partial x_n} \\
-    ... & ... & ... & ... \\
-    \frac{{\partial}^2 f}{\partial x_n \partial x_1} & \frac{{\partial}^2 f}{\partial x_n \partial x_2} & ... & \frac{{\partial}^2 f}{\partial x_n^2}
-    \end{pmatrix}
-    $$
-  * $\bold{x}$를 기울기 방향으로 갱신하고, 그 진행 거리를 헤세 행렬의 역행렬을 사용하여 조정한다.
+* 다변수 함수의 뉴턴 방법 (즉, <!-- $x = (x_1, x_2, ..., x_n)$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=x%20%3D%20(x_1%2C%20x_2%2C%20...%2C%20x_n)">일 때, <!-- $y = f(x)$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=y%20%3D%20f(x)">에 대한 뉴턴 방법)
+  * <!-- $x \leftarrow x - [{\nabla}^2 f(x)]^{-1} \nabla f(x)$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=x%20%5Cleftarrow%20x%20-%20%5B%7B%5Cnabla%7D%5E2%20f(x)%5D%5E%7B-1%7D%20%5Cnabla%20f(x)">
+  * <!-- $\nabla f(x)$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cnabla%20f(x)"> : 기울기(gradient), <!-- $x$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=x">의 각 원소에 대한 미분
+    * <!-- $\nabla f(x) = \frac{\partial f}{\partial x} = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, ..., \frac{\partial f}{\partial x_n})^{T}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cnabla%20f(x)%20%3D%20%5Cfrac%7B%5Cpartial%20f%7D%7B%5Cpartial%20x%7D%20%3D%20(%5Cfrac%7B%5Cpartial%20f%7D%7B%5Cpartial%20x_1%7D%2C%20%5Cfrac%7B%5Cpartial%20f%7D%7B%5Cpartial%20x_2%7D%2C%20...%2C%20%5Cfrac%7B%5Cpartial%20f%7D%7B%5Cpartial%20x_n%7D)%5E%7BT%7D">
+  * <!-- ${\nabla}^2 f(x)$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%7B%5Cnabla%7D%5E2%20f(x)"> : 헤세 행렬(Hessian matrix)
+    * <!-- ${\nabla}^2 f(x) = \frac{{\partial}^2 f}{\partial x \partial x^T} = \begin{pmatrix} \frac{{\partial}^2 f}{\partial x_1^2} & \frac{{\partial}^2 f}{\partial x_1 \partial x_2} & ... & \frac{{\partial}^2 f}{\partial x_1 \partial x_n} \\ \frac{{\partial}^2 f}{\partial x_2 \partial x_1} & \frac{{\partial}^2 f}{\partial x_2^2} & ... & \frac{{\partial}^2 f}{\partial x_2 \partial x_n} \\ ... & ... & ... & ... \\ \frac{{\partial}^2 f}{\partial x_n \partial x_1} & \frac{{\partial}^2 f}{\partial x_n \partial x_2} & ... & \frac{{\partial}^2 f}{\partial x_n^2} \end{pmatrix}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%7B%5Cnabla%7D%5E2%20f(x)%20%3D%20%5Cfrac%7B%7B%5Cpartial%7D%5E2%20f%7D%7B%5Cpartial%20x%20%5Cpartial%20x%5ET%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20%5Cfrac%7B%7B%5Cpartial%7D%5E2%20f%7D%7B%5Cpartial%20x_1%5E2%7D%20%26%20%5Cfrac%7B%7B%5Cpartial%7D%5E2%20f%7D%7B%5Cpartial%20x_1%20%5Cpartial%20x_2%7D%20%26%20...%20%26%20%5Cfrac%7B%7B%5Cpartial%7D%5E2%20f%7D%7B%5Cpartial%20x_1%20%5Cpartial%20x_n%7D%20%5C%5C%20%5Cfrac%7B%7B%5Cpartial%7D%5E2%20f%7D%7B%5Cpartial%20x_2%20%5Cpartial%20x_1%7D%20%26%20%5Cfrac%7B%7B%5Cpartial%7D%5E2%20f%7D%7B%5Cpartial%20x_2%5E2%7D%20%26%20...%20%26%20%5Cfrac%7B%7B%5Cpartial%7D%5E2%20f%7D%7B%5Cpartial%20x_2%20%5Cpartial%20x_n%7D%20%5C%5C%20...%20%26%20...%20%26%20...%20%26%20...%20%5C%5C%20%5Cfrac%7B%7B%5Cpartial%7D%5E2%20f%7D%7B%5Cpartial%20x_n%20%5Cpartial%20x_1%7D%20%26%20%5Cfrac%7B%7B%5Cpartial%7D%5E2%20f%7D%7B%5Cpartial%20x_n%20%5Cpartial%20x_2%7D%20%26%20...%20%26%20%5Cfrac%7B%7B%5Cpartial%7D%5E2%20f%7D%7B%5Cpartial%20x_n%5E2%7D%20%5Cend%7Bpmatrix%7D">
+  * <!-- $x$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=x">를 기울기 방향으로 갱신하고, 그 진행 거리를 헤세 행렬의 역행렬을 사용하여 조정한다.
 * 한계 : 매개변수가 많아지면 헤세 행렬의 역행렬 계산에 너무 많은 자원이 소모된다.
-  * 매개변수 $n$개면 메모리 $n^2$만큼 사용, $n \times n$의 역행렬 계산에는 $n^3$만큼 사용
+  * 매개변수 <!-- $n$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=n">개면 메모리 <!-- $n^2$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=n%5E2">만큼 사용, <!-- $n \times n$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=n%20%5Ctimes%20n">의 역행렬 계산에는 <!-- $n^3$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=n%5E3">만큼 사용
 * 대안
   * 준 뉴턴 방법(Quasi-Newton Method, QNM) : 뉴턴 방법 중 헤세 행렬의 역행렬을 근사하여 사용하는 방법의 총칭
     * ex) L-BFGS 등
@@ -288,39 +278,8 @@ class Mul(Function):
   * [미분이 포함된 식에서의 미분](https://github.com/WegraLee/deep-learning-from-scratch-3/blob/master/steps/step36.py)
     * 예시 : [WGAN-GP에서 최적화하는 함수 $L$](https://paperswithcode.com/method/wgan-gp-loss)에 기울기가 들어있다. 함수 $L$을 최적화하기 위해 두번째 역전파를 한다.
   * 헤세 행렬과 벡터의 곱(Hessian-vector product)
-    * ${\nabla}^2 f(\bold{x}) \bold{v} = \nabla (\bold{v}^T \nabla f(\bold{x}))$
+    * <!-- ${\nabla}^2 f(x) v = \nabla (v^T \nabla f(x))$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%7B%5Cnabla%7D%5E2%20f(x)%20v%20%3D%20%5Cnabla%20(v%5ET%20%5Cnabla%20f(x))">
     * 오른쪽처럼, 벡터의 내적을 먼저 구하고 그 결과로부터 다시 한 번 기울기를 구함으로써, 해세 행렬을 만들지 않고도 값을 구할 수 있다.
     * 예시 : [TRPO(Trust Region Policy Optimization)](https://arxiv.org/abs/1502.05477)에서는 헤세 행렬과 벡터의 곱을 구할 때 double backprop을 사용한다.
-    $$
-    {\nabla}^2 f(\bold{x}) \bold{v} =
-    \begin{pmatrix}
-        \frac{{\partial}^2 f}{\partial x_1^2} & \frac{{\partial}^2 f}{\partial x_1 \partial x_2} \\
-        \frac{{\partial}^2 f}{\partial x_2 \partial x_1} & \frac{{\partial}^2 f}{\partial x_2^2}
-    \end{pmatrix}
-    \begin{pmatrix}
-        v_1 \\ v_2
-    \end{pmatrix} =
-    \begin{pmatrix}
-        \frac{{\partial}^2 f}{\partial x_1^2} v_1 + \frac{{\partial}^2 f}{\partial x_1 \partial x_2} v_2 \\
-        \frac{{\partial}^2 f}{\partial x_2 \partial x_1} v_1 + \frac{{\partial}^2 f}{\partial x_2^2} v_2
-    \end{pmatrix}
-    $$
-    $$
-    \nabla (\bold{v}^T \nabla f(\bold{x})) = \nabla
-    \begin{pmatrix}
-        \begin{pmatrix}
-            v_1 & v_2
-        \end{pmatrix}
-        \begin{pmatrix}
-            \frac{\partial f}{\partial x_1} \\ \frac{\partial f}{\partial x_2}
-        \end{pmatrix}
-    \end{pmatrix} = \nabla
-    \begin{pmatrix}
-        \frac{\partial f}{\partial x_1} v_1 + \frac{\partial f}{\partial x_2} v_2
-    \end{pmatrix} = 
-    \begin{pmatrix}
-        \frac{{\partial}^2 f}{\partial x_1^2} v_1 + \frac{{\partial}^2 f}{\partial x_1 \partial x_2} v_2 \\
-        \frac{{\partial}^2 f}{\partial x_2 \partial x_1} v_1 + \frac{{\partial}^2 f}{\partial x_2^2} v_2
-    \end{pmatrix}
-    $$
-
+      * ![image](https://user-images.githubusercontent.com/35680202/129677014-d36fb5b4-8bc3-46c5-9efc-77c5fcddad2e.png)
+      * ![image](https://user-images.githubusercontent.com/35680202/129677062-7ba3401d-3ce5-4935-86e6-d62fabca0f5e.png)
